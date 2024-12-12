@@ -584,31 +584,81 @@ body {
     display: block;
 }
 
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: floatHeart 2s ease-out forwards;
+}
+
+@keyframes floatHeart {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1);
+    }
+}
+
 .hover-text {
     position: absolute;
     left: 50%;
-    bottom: -40px;
+    bottom: -100px;
     transform: translateX(-50%);
     color: var(--text-color);
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
+    font-weight: 500;
     white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease, bottom 0.3s ease;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    letter-spacing: -0.02em;
 }
 
 .image-wrapper:hover .hover-text {
     opacity: 1;
-    bottom: -30px;
+    bottom: -90px;
+    transform: translateX(-50%) scale(1.02);
+    color: #000;
 }
 
 @media (max-width: 768px) {
     .hover-text {
-        font-size: 1rem;
+        font-size: 1.4rem;
         white-space: normal;
         text-align: center;
         width: 100%;
+        bottom: -120px;
     }
+    
+    .image-wrapper:hover .hover-text {
+        bottom: -110px;
+    }
+}
+
+/* Coming Soon Styles */
+.coming-soon {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.coming-soon:hover {
+    color: var(--text-color);
 }
 
 /* Footer Styles */

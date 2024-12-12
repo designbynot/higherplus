@@ -260,4 +260,45 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchmove', onTouchMove, { passive: false });
         document.addEventListener('touchend', onTouchEnd);
     }
+
+    // Memetics Heart Animation
+    const imageWrapper = document.querySelector('.image-wrapper');
+    const heartsContainer = document.querySelector('.hearts-container');
+    
+    if (imageWrapper && heartsContainer) {
+        let isAnimating = false;
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 0.5 + 's';
+            heartsContainer.appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+        
+        function startHeartAnimation() {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            // Create 60 hearts
+            let heartsCreated = 0;
+            const heartInterval = setInterval(() => {
+                createHeart();
+                heartsCreated++;
+                
+                if (heartsCreated >= 60) {
+                    clearInterval(heartInterval);
+                    isAnimating = false;
+                }
+            }, 50); // Create a new heart every 50ms
+        }
+        
+        imageWrapper.addEventListener('mouseenter', startHeartAnimation);
+    }
 });
