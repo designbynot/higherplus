@@ -261,6 +261,51 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchend', onTouchEnd);
     }
 
+    // Counter animation
+    function animateCounter(element, target, duration = 2000) {
+        let start = 0;
+        const increment = target / (duration / 16); // 60fps
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            start = Math.min(Math.floor(progress * target), target);
+            element.textContent = start;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    // Intersection Observer for counter animation
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statItem = entry.target;
+                const counter = statItem.querySelector('.counter');
+                const target = parseInt(statItem.dataset.target);
+                animateCounter(counter, target);
+                counterObserver.unobserve(statItem);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all stat items
+    document.querySelectorAll('.stat-item').forEach(item => {
+        counterObserver.observe(item);
+    });
+
     // Memetics Heart Animation
     const imageWrapper = document.querySelector('.image-wrapper');
     const heartsContainer = document.querySelector('.hearts-container');
