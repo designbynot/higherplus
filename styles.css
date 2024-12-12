@@ -558,6 +558,59 @@ body {
     }
 }
 
+/* Memetics Page Styles */
+.memetics-container {
+    min-height: calc(100vh - 160px); /* Account for navbar and footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.memetics-content {
+    position: relative;
+    max-width: 100%;
+    text-align: center;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.memetics-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hover-text {
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    transform: translateX(-50%);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+}
+
+.image-wrapper:hover .hover-text {
+    opacity: 1;
+    bottom: -30px;
+}
+
+@media (max-width: 768px) {
+    .hover-text {
+        font-size: 1rem;
+        white-space: normal;
+        text-align: center;
+        width: 100%;
+    }
+}
+
 /* Footer Styles */
 .footer {
     padding: 4rem 2rem;
