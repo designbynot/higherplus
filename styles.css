@@ -33,6 +33,15 @@ body {
     backdrop-filter: blur(10px);
 }
 
+.logo a {
+    display: block;
+    transition: opacity var(--transition-speed);
+}
+
+.logo a:hover {
+    opacity: 0.8;
+}
+
 .logo img {
     height: 40px;
     object-fit: contain;
@@ -284,6 +293,96 @@ body {
     letter-spacing: -0.04em;
 }
 
+.magazine-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--background-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.image-scatter {
+    position: relative;
+    min-height: 300vh;
+    width: 100%;
+    padding: 2rem;
+}
+
+.draggable-image {
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    transform-origin: center;
+    background: white;
+    will-change: transform;
+}
+
+.draggable-image.dragging {
+    cursor: grabbing;
+    z-index: 1000 !important;
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.draggable-image:hover {
+    z-index: 999;
+}
+
+.draggable-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.magazine-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+    width: 100%;
+    text-align: center;
+}
+
+.magazine-watermark h2 {
+    font-size: 4rem;
+    letter-spacing: -0.04em;
+    opacity: 0.15;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.magazine-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background-color);
+    z-index: 1001;
+}
+
+.magazine-footer h2 {
+    font-size: 1.2rem;
+    letter-spacing: -0.04em;
+    opacity: 0.8;
+}
+
 @media (max-width: 768px) {
     .magazine-hero h1 {
         font-size: 3rem;
@@ -291,6 +390,171 @@ body {
     
     .magazine-subtitle {
         font-size: 1.2rem;
+    }
+    
+    .draggable-image {
+        transition: none;
+    }
+
+    .magazine-watermark h2 {
+        font-size: 2.5rem;
+    }
+
+    .image-scatter {
+        min-height: 200vh;
+    }
+}
+
+/* Sprint Page Styles */
+.sprint-hero {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.sprint-hero h1 {
+    font-size: 3.5rem;
+    letter-spacing: -0.04em;
+    max-width: 800px;
+}
+
+.sprint-reports {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.report-column {
+    width: 100%;
+}
+
+.report-card {
+    border: 1px solid var(--primary-color);
+    margin-bottom: 2rem;
+    background: var(--background-color);
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+}
+
+.report-header h2 {
+    font-size: 1.5rem;
+    letter-spacing: -0.04em;
+    margin: 0;
+}
+
+.expand-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-speed);
+}
+
+.expand-btn.active {
+    transform: rotate(45deg);
+}
+
+.report-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 1.5rem;
+}
+
+.report-content.active {
+    max-height: 5000px;
+    padding: 0 1.5rem 1.5rem;
+    transition: max-height 0.5s ease-in;
+}
+
+.report-section {
+    margin-bottom: 2rem;
+}
+
+.report-section:last-child {
+    margin-bottom: 0;
+}
+
+.report-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+}
+
+.report-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.report-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.report-section ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.report-section ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
+
+/* Report Images */
+.report-image {
+    width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--primary-color);
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.image-grid .report-image {
+    margin: 0;
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .sprint-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .sprint-reports {
+        grid-template-columns: 1fr;
     }
 }
 
