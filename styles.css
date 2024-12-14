@@ -946,3 +946,107 @@ body {
         font-size: 2rem;
     }
 }
+
+/* Services Section */
+.services {
+    padding: 6rem 2rem;
+    background-color: var(--background-color);
+}
+
+.services-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.service-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    padding: 2rem;
+    border-radius: 20px;
+    background: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.05),
+        rgba(0, 0, 0, 0.1)
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.service-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.service-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: auto;
+}
+
+.service-button {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--text-color);
+    color: var(--background-color);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.service-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.service-button.disabled {
+    background: #E0E0E0;
+    cursor: not-allowed;
+}
+
+.service-button.disabled:hover {
+    opacity: 1;
+    transform: none;
+}
+
+@media (max-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        aspect-ratio: auto;
+        min-height: 300px;
+    }
+}
